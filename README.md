@@ -60,7 +60,7 @@ voici l'objet qui reflète le ping des connexions d'une application:
       "nom": "nomApplicationAppele",
      "environnement": "environnement(dev, integ, recette, prod) Appele",
       "version": "versionApplicationAppele",
-      "url : "urlAppele"
+      "url" : "urlAppele"
     }
   ],
   "applicationEchec" : [

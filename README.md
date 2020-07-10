@@ -5,7 +5,7 @@ Projet de monitoring d'un parc d'applications
 ## le principe
 
 Les applications sont souvent liées les unes aux autres et lorsqu'une application tombe, il se produit souvent une réaction en chaîne.
-Le but est alors de monitorer ces applications et de pouvoir détecter en un instant l'étendue de la panne. 
+Le but est alors de monitorer ces applications et de pouvoir détecter en un instant l'impact de l'incident. 
 Un autre but est aussi d'atténuer l'effet cascade et ne pas rester dans le flou lors d'un incident.
 
 ## l'application en elle-même
@@ -14,10 +14,15 @@ Il s'agit d'une simple application spring boot qui lance à intervalles très r�
 
 ### ping de vie de l'application
 
-Le ping de vie est un point d'entrée de toute application qu'on souhaite monitorer. Il permet de définir les applications qui sont UP ou DOWN
+Le ping de vie est un point d'entrée de toute application qu'on souhaite monitorer. Il permet de définir l'état des applications.
 Dans la majorité des cas , il s'agit d'une URL dans le controller rest parent qui renvoie un simple objet et qui définit l'application dans son environnement.
 
-Typiquement l'objet suivant reflète la clé du ping :
+il faut faire les étapes suivantes:
+ * créer un point d'entrée de ping , exemple /ping
+ * déclarer dans l'application de monitoring l'url : url-application/ping
+
+
+retour fait à l'application de monitoring  :
 
 ```json
 {
@@ -27,7 +32,7 @@ Typiquement l'objet suivant reflète la clé du ping :
 }
 ```
 
-Sur l'application, une interface permettra d'ajouter une nouvelle url à monitorer. L'URL détermienra à elle seule l'application et l'environnement qu'on souhaite atteindre.
+Sur l'application, une interface permettra d'ajouter une nouvelle url applicative à monitorer. L'URL détermienra à elle seule l'application et l'environnement qu'on souhaite atteindre.
 
 Ce processus permet :
 * d'avoir une cartographie applicative à jour
@@ -40,16 +45,20 @@ Ce processus permet :
 
 une application communique avec d'autres applications par plusieurs moyens à sa disposition
 
-### ping de connexion
+### ping de links
 
-lorsqu'une application est up, cela ne veut pas dire que l'application est opérationnelle. si elle ne peut pas atteindre une référentielle, transmettre en temps réel l'application. il peut y avoir une perte de transfert de données.
+lorsqu'une application est up, cela ne veut pas dire que l'application est opérationnelle. si elle ne peut pas atteindre par exemple référentielle ou transmettre en temps réel à une autre application. cela peut representer une perte de données, un blocage etc.....
 
-le ping de connexion est le premier point d'entée entre deux applications. lorsque l'on établit un lien entre application, il est important de commencer par le test de connexion à travers un ping. le ping de connexion permet de faire un premier pas simple pour tester la configuration pour que l'appel se passe bien. et ensuite, il permet de créer le futur ping de connexion
+lorsque deux applications doivent communiquer entre elle (app1 appelle app2), il convient de faire les étapes suivantes: 
 
-encore une fois, il s'agit de rajouter dans le controller rest parent une url qui renvoit un liste des connexions entres applications et envirronnement.
-l'application fera une boucle d'avoir des différents pings pour chaque links qu'elle possède
+* app1 doit créer son point d'entrée pour l'application de monitoring , par exemple /ping-links.
+* app2 doit créer son point d'entrée pour le ping-links de l'app1 , par exemple /app1/ping
+* app1 doit appeler /app1/ping  lorsque l'on appelle /ping-links
+* app1 doit rajouter dans l'application de monitoring, l'url : url-app1/ping-links
 
-voici l'objet qui reflète le ping des connexions d'une application:
+note: bien sur, il revient aux applications de déterminer les bons test de connexions entre 2 applications (sécurisé, url , etc...)
+
+retour fait à l'application de monitoring par app1 :
 ```json
 {
   "nom": "nomApplication",
@@ -72,12 +81,12 @@ voici l'objet qui reflète le ping des connexions d'une application:
 }
 ```
 sur l'application,
-une interface permettra d'ajouter cette nouvelle url à monitorer. il s'agit que de cela car c'est l'appel ensuite qui déterminera tout seul quelles applications sont liés et monitorés 
+une interface permettra d'ajouter cette nouvelle url ping-links à monitorer.  c'est l'appel ensuite qui déterminera tout seul quelles applications sont liées et monitorées 
 
 il permet de :
-* détecter les liens en echecs et d'avoir un état des lieux 
+* détecter les links en echecs et d'avoir un état des lieux 
 * définir quelles applications sont liées avec une application
-* d'avoir les couples applications/environnement liées entre elles
+* d'avoir les couples applications/environnement liées entre elles (détecter/éviter le cross environnement)
 * les versions déployés et les pouvoir détecter les soucis d'assemblage et ainsi liées des versions
 * coordonnéer les livraisons de version entre application (pouvoir liéer deux versions pour obliger leur cohérence dans les environnements)
 
@@ -85,17 +94,19 @@ il permet de :
 ## monitoring à partir de notre application
 
 cela se base sur trois type de couleurs:
-* verte : application OK
-* orange : application coupée et maitrisé
-* violet : processus de livraison en cours
-* rouge : application down non maitrisé
+* verte : application/links OK
+* jaune : uniquement pour une application instable ( ping appli OK, au moins un ping link Down )
+* orange : application/links coupée et maitrisé
+* violet : uniquement pour application avec un processus de livraison en cours
+* rouge : application/links down non maitrisé
 un filtre peut être ajouter pour voir ou ne pas voir les différents couleurs
 
 ### écran de vie
 
 l'écran de vie permet d'avoir une vue globale de l'état des applications.
 
-sa vue par défaut lorsque l'on arrive sur l'écran, c'est la liste des applications hors services  (qui regroupe les applications down ou éteintes) quelque soit l'environnement . 
+sa vue par défaut lorsque l'on arrive sur l'écran, c'est la liste des applications hors services  (qui regroupe les applications down ou éteintes ou instable) quelque soit l'environnement . 
+
 
 ensuite, il possède plusieurs onglets.
 un onglet represente un environnement, il se base sur la liste des environnements récupérer par les différents pings. 
@@ -106,11 +117,11 @@ cela nous permet d'avoir l'ensemble des applications d'un envirronement (detecti
 
 l'écran de links permet d'avoir le modele spaghetti du parc applicatif
 
-sa vue par défaut lorsque l'on arrive sur l'écran, c'est la liste des links hors services  (qui regroupe les applications down ou éteintes) quelque soit l'environnement.
+sa vue par défaut lorsque l'on arrive sur l'écran, c'est la liste des links hors services  (qui regroupe les links down ou éteintes) quelque soit l'environnement.
 
 ensuite, il possède plusieurs onglets.
 un onglet represente un environnement, il se base sur la liste des environnements récupérer par les différents pings. 
-cela nous permet d'avoir une vue spaghetti (ou vu mode reseau scnf) de l'état des liens entre applications
+cela nous permet d'avoir une vue spaghetti (ou vu mode reseau scnf) de l'état des liens entre applications d'un envirronement
 
 deux filtres de la vue permettront de limiter le reseaux à l'appelant ou/et l'appelé.
 
@@ -136,7 +147,7 @@ une interface permet d'enregister une application avec un url du ping de vie. ai
 
 ### déclarer une application qui communique avec d'autres applications
 
-une interface permet d'avoir un url de ping de connexion
+une interface permet d'ajouter l'url de ping de links d'une application 
 
 ### déclarer/ plannifier une livraison
 

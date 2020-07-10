@@ -22,9 +22,9 @@ Dans la majorité des cas , il s'agit d'une url dans le controller rest parent q
 Typiquement l'objet suivant reflète la clé du ping :
 ```json
 {
-  "nom": 'nomApplication',
- "environnement": 'environnement(dev, integ, recette, prod)'
-  "version": 'versionApplication'
+  "nom": "nomApplication",
+ "environnement": "environnement(dev, integ, recette, prod)"
+  "version": "versionApplication"
 }
 ```
 Sur l'application, une interface permettra une nouvelle url à monitorer. il s'agit que de cela car c'est l'appel ensuite qui déterminera tout seul pour quelle application et environnement il s'agit.
@@ -52,21 +52,21 @@ l'application fera une boucle d'avoir des différents pings pour chaque links qu
 voici l'objet qui reflète le ping des connexions d'une application:
 ```json
 {
-  "nom": 'nomApplication',
-  "environnement": 'environnement(dev, integ, recette, prod)'
-  "version": 'versionApplication',
+  "nom": "nomApplication",
+  "environnement": "environnement(dev, integ, recette, prod)"
+  "version": "versionApplication",
   "applicationOk" :[
     {
-      "nom: 'nomApplicationAppele',
-     "environnement: 'environnement(dev, integ, recette, prod) Appele'
-      "version: 'versionApplicationAppele',
-      "url : 'urlAppele'
+      "nom: "nomApplicationAppele",
+     "environnement: "environnement(dev, integ, recette, prod) Appele"
+      "version: "versionApplicationAppele",
+      "url : "urlAppele"
     }
   ],
   "applicationEchec" : [
     {
-      "nom": 'nomApplicationAppele',
-      "url" : 'urlAppele'
+      "nom": "nomApplicationAppele",
+      "url" : "urlAppele"
     }
   ]
 }

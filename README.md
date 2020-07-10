@@ -1,33 +1,32 @@
 # monitoring
-projet de monitoring de parc d'applications
+Projet de monitoring d'un parc d'applications
 
 ## le principe
 
-les applications sont souvent liées les unes aux autres et lorsqu'une application tombe, il arrive souvent que c'est une réaction en chaine qui se produit.
-le but est d'avoir un monitoring de ses applications et de pouvoir détecter en un instant l'étendu de la panne. 
-le autre but est aussi d'atténuer l'effet cascade et ne pas rester dans le flou lors d'un incident.
+Les applications sont souvent liées les unes aux autres et lorsqu'une application tombe, il se produit souvent une réaction en chaîne.
+Le but est alors de monitorer ces applications et de pouvoir détecter en un instant l'étendue de la panne. 
+Un autre but est aussi d'atténuer l'effet cascade et ne pas rester dans le flou lors d'un incident.
 
 
-## l'application en elle même
+## l'application en elle-même
 
-une simple application spring boot qui lance à intervalle très régulier les différentes appels pour atteindre les pings d'une ou des applications.
+Il s'agit d'une simple application spring boot qui lance à intervalles très réguliers des pings d'une ou plusieurs applications.
 
 ### ping de vie de l'application
 
-le ping de vie est un point d'entrée de toute application qui veut être monitorée. elle permet de définir les applications qui sont UP ou DOWN
+Le ping de vie est un point d'entrée de toute application qu'on souhaite monitorer. Il permet de définir les applications qui sont UP ou DOWN
 
-dans la majorité des cas , il s'agit d'une url dans le controller rest parent qui renvoit un simple objet qui définit l'application dans son environnement.
+Dans la majorité des cas , il s'agit d'une url dans le controller rest parent qui renvoie un simple objet qui définit l'application dans son environnement.
 
 
-typiquement l'objet suivant reflète la clé du ping :
+Typiquement l'objet suivant reflète la clé du ping :
 {
   "nom": 'nomApplication',
  "environnement": 'environnement(dev, integ, recette, prod)'
   "version": 'versionApplication'
 }
 
-sur l'application,
-une interface permettra une nouvelle url à monitorer. il s'agit que de cela car c'est l'appel ensuite qui déterminera tout seul pour quelle application et environnement il s'agit.
+Sur l'application, une interface permettra une nouvelle url à monitorer. il s'agit que de cela car c'est l'appel ensuite qui déterminera tout seul pour quelle application et environnement il s'agit.
 
 il permet de :
 * détecter qu'une application tombe ou est en cours de livraison

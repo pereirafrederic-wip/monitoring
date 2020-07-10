@@ -1,4 +1,5 @@
 # monitoring
+
 Projet de monitoring d'un parc d'applications
 
 ## le principe
@@ -7,7 +8,6 @@ Les applications sont souvent liées les unes aux autres et lorsqu'une applicati
 Le but est alors de monitorer ces applications et de pouvoir détecter en un instant l'étendue de la panne. 
 Un autre but est aussi d'atténuer l'effet cascade et ne pas rester dans le flou lors d'un incident.
 
-
 ## l'application en elle-même
 
 Il s'agit d'une simple application spring boot qui lance à intervalles très réguliers des pings d'une ou plusieurs applications.
@@ -15,11 +15,10 @@ Il s'agit d'une simple application spring boot qui lance à intervalles très r�
 ### ping de vie de l'application
 
 Le ping de vie est un point d'entrée de toute application qu'on souhaite monitorer. Il permet de définir les applications qui sont UP ou DOWN
-
 Dans la majorité des cas , il s'agit d'une url dans le controller rest parent qui renvoie un simple objet qui définit l'application dans son environnement.
 
-
 Typiquement l'objet suivant reflète la clé du ping :
+
 ```json
 {
   "nom": "nomApplication",
@@ -27,7 +26,8 @@ Typiquement l'objet suivant reflète la clé du ping :
   "version": "versionApplication"
 }
 ```
-Sur l'application, une interface permettra une nouvelle url à monitorer. il s'agit que de cela car c'est l'appel ensuite qui déterminera tout seul pour quelle application et environnement il s'agit.
+
+ur l'application, une interface permettra une nouvelle url à monitorer. il s'agit que de cela car c'est l'appel ensuite qui déterminera tout seul pour quelle application et environnement il s'agit.
 
 il permet de :
 * détecter qu'une application tombe ou est en cours de livraison

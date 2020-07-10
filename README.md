@@ -95,55 +95,55 @@ Il permet de :
 
 Cela se base sur trois type de couleurs:
 * verte : application/links OK.
+* bleu : uniquement pour application avec un processus de livraison en cours.
 * jaune : uniquement pour une application instable ( ping appli OK, au moins un ping link Down critique/bloquant).
 * orange : application/links coupée et maitrisé.
-* violet : uniquement pour application avec un processus de livraison en cours.
 * rouge : application/links down non maitrisé.
-un filtre peut être ajouter pour voir ou ne pas voir les différents couleurs.
+
+Un filtre peut être ajouté pour voir ou ne pas voir les différents couleurs.
 
 ### écran de vie
 
 L'écran de vie permet d'avoir une vue globale de l'état des applications.
 
-Sa vue par défaut lorsque l'on arrive sur l'écran, c'est la liste des applications hors services  (qui regroupe les applications down ou éteintes ou instable) quelque soit l'environnement . 
-
+La vue par défaut lorsque l'on arrive sur l'écran, est la liste des applications hors service  (ce qui regroupe les applications down ou éteintes ou instables) quel que soit l'environnement . 
 
 Ensuite, il possède plusieurs onglets:
-Un onglet represente un environnement, il se base sur la liste des environnements récupérer par les différents pings. 
-Cela nous permet d'avoir l'ensemble des applications d'un envirronement (detection application manquante).
+Un onglet represente un environnement, il se base sur la liste des environnements récupérés par les différents pings. 
+Cela nous permet d'avoir l'ensemble des applications d'un environement (detection application manquante).
 
 
 ### écran de links
 
 L'écran de links permet d'avoir le modele spaghetti du parc applicatif.
 
-Sa vue par défaut lorsque l'on arrive sur l'écran, c'est la liste des links hors services  (qui regroupe les links down ou éteintes) quelque soit l'environnement.
+La vue par défaut lorsque l'on arrive sur l'écran, est la liste des links hors services  (qui regroupe les links down ou éteints) quel que soit l'environnement.
 
 Ensuite, il possède plusieurs onglets:
-Un onglet represente un environnement, il se base sur la liste des environnements récupérer par les différents pings. 
-Cela nous permet d'avoir une vue spaghetti (ou vu mode reseau scnf) de l'état des liens entre applications d'un envirronement.
+Un onglet represente un environnement, il se base sur la liste des environnements récupérés par les différents pings. 
+Cela nous permet d'avoir une vue spaghetti (ou vue mode réseau SNCF) de l'état des liens entre applications d'un environnement.
 
-Deux filtres de la vue permettront de limiter le reseaux à l'appelant ou/et l'appelé.
+Deux filtres de la vue permettront de limiter l'affichage du monitoring à l'appelant ou/et l'appelé.
 
 
 
 ### timeline
 
-Une timeline permet de voir l'historique des applications et des environements au cours du temps et de voir les plannifications de livraison.
-Cela permet aussi d'avoir les nuances de couleurs et donc des évenements .
+Une timeline permet de voir l'historique des applications et des environements au cours du temps et de voir les planifications de livraison.
+Cela permet aussi d'avoir les nuances de couleurs et donc des événements .
 Cela peut servir de point de travail pour la coordination d'une livraison (cas d'adhérence entre application) et détecter les incohérences de livraisons.
 
 ### statistique 
 
 Un dashboard de continuité d'application qui permet par exemple de voir dans un temps imparti :
- * compteur de down pour une/des application(s).
- * des périodicitées horaire/semaine/mois de down (exemple: une application avec un traitement lourd impacte entre 14h-15h  chaque vendredi les temps réponses d'un link).
+ * compteur de DOWN pour une/des application(s).
+ * des périodicités horaire/semaine/mois de DOWN (exemple: une application avec un traitement lourd impacte entre 14h-15h  chaque vendredi les temps réponses d'un link).
 
 ## actions dans l'application
 
 ### déclarer une application
 
-Une interface permet d'enregister une application avec un url du ping de vie. ainsi qu'une liste d'email de contact pour les alertes.
+Une interface permet d'enregister une application avec une URL du ping de vie. ainsi qu'une liste d'emails de contact pour les alertes.
 
 ### déclarer une application qui communique avec d'autres applications
 
@@ -151,18 +151,18 @@ Une interface permet d'ajouter l'url de ping de links d'une application .
 
 ### déclarer/ plannifier une livraison
 
-Une interface permet de définir/plannifier une livraison d'une application sur un environnement pour une version.
-ainsi cela permet de ne pas être rouge, mais d'etre violet sur le monitoring. ignorant donc la partie alerte.
+Une interface permet de définir/planifier une livraison d'une application sur un environnement pour une version.
+Cela permet de ne pas être rouge, mais d'etre violet sur le monitoring. ignorant donc la partie alerte.
 
-un mail est lancé aux contacts mais aussi aux contacts des applications qui ont un link avec cette application dans cet environnement.
+Un mail est lancé aux contacts mais aussi aux contacts des applications qui ont un link avec cette application dans cet environnement.
 
 ### déclarer une prise en charge
 
-Lorsqu'une application est down, un mail est envoyés non seulement aux contacts de l'application mais aussi aux contacts des applications qui ont un link avec cette application dans cette environnement.
+Lorsqu'une application est DOWN, un mail est envoyé non seulement aux contacts de l'application mais aussi aux contacts des applications qui ont un link avec cette application dans cet environnement.
 
 L'équipe peut venir dire que cela est pris en compte par l'équipe et qu'une analyse est en cours, un autre mail préviendra qu'une action est bien en cours, atténuant l'effet alerte
 
-Cela permet de passer de rouge à orange sur l'écran.
+Cela permet de passer de rouge à orange sur l'écran (prise en charge par l'équipe ou blocage volontaire d'une fonctionnalité).
 
 Le mail d'envoi aux contacts de l'applicaton contient un bouton qui permet directement d'aller dire que c'est bien lu et pris en compte (qui fera l'appel rest qui faut pour valider la prise en compte (bonus email de la personne qui a dit qu'il avait pris en compte=> affichage !).
 
@@ -172,15 +172,13 @@ Suite à l'analyse ou directement, lorsque l'on sait resoudre le problème, en d
 
 Le mail d'envoi aux contacts de l'applicaton contient un bouton qui permet directement d'aller dire que c'est en cours de UP.
 
-Lors du passage ente orange-> vert et rouge -> vert par la sonde du ping, un mail est bien sur envoyés aux contacts (appli et link) pour prévenir du retour à la normale.
+Lors du passage ente orange-> vert et rouge -> vert par la sonde du ping, un mail est bien sûr envoyé aux contacts (appli et link) pour prévenir du retour à la normale.
 
 ### critère down
 
-Afin de limiter les alertes , il peut être nécessaire de définir un critère de down, est ce que l'application est up 24/7.
-Alors on peut ajouter une/des periodes periode à tester qu'on ajoute à la déclaration de l'application
+Afin de limiter les alertes , il peut être nécessaire de définir un critère de DOWN, en limitant par exemple l'analyse sur une plage horaire (ouverture de l'application seulement entre 8h et 0h par exemple).
+Alors on peut ajouter une/des périodes à tester qu'on ajoute à la déclaration de l'application
 
-Une application est down par un seul appel ping, est ce que l'on considère que c'est une interruption ? un compteur de down peut être ajouté, ainsi on définit un seuil d'acceptance de down. si on ping toutes les 1 minutes , on peut autorisé le fait d'etre down 3* 1 min. ains on ne ne lance les alertes qu'après 3 min de down.
-
-
-
-
+Définition d'un seuil d'acceptance de nombre de DOWN.
+Si on ping toutes les minutes, on peut par exemple faire apsser au ROUGE l'indicateur à partir du troisième ping en échec. On n'alerte ainsi qu'après le seuil d'acceptance de trois minutes (micro coupure) soit dépassé.
+On peut aussi décdier de stopper ponctuellement le monitoing pendant une heure par exemple.

@@ -21,9 +21,9 @@ dans la majorité des cas , il s'agit d'une url dans le controller rest parent q
 
 typiquement l'objet suivant reflète la clé du ping :
 {
-  nom: nomApplication,
-  environnement: environnement(dev, integ, recette, prod)
-  version: versionApplication
+  "nom": 'nomApplication',
+ "environnement": 'environnement(dev, integ, recette, prod)'
+  "version": 'versionApplication'
 }
 
 sur l'application,
@@ -47,26 +47,25 @@ lorsqu'une application est up, cela ne veut pas dire que l'application est opér
 le ping de connexion est le premier point d'entée entre deux applications. lorsque l'on établit un lien entre application, il est important de commencer par le test de connexion à travers un ping. le ping de connexion permet de faire un premier pas simple pour tester la configuration pour que l'appel se passe bien. et ensuite, il permet de créer le futur ping de connexion
 
 encore une fois, il s'agit de rajouter dans le controller rest parent une url qui renvoit un liste des connexions entres applications et envirronnement.
+l'application fera une boucle d'avoir des différents pings pour chaque links qu'elle possède
 
 voici l'objet qui reflète le ping des connexions d'une application:
 {
-  nom: nomApplication,
-  environnement: environnement(dev, integ, recette, prod)
-  version: versionApplication,
-  applicationOk :[
+  "nom": 'nomApplication',
+  "environnement": 'environnement(dev, integ, recette, prod)'
+  "version": 'versionApplication',
+  "applicationOk" :[
     {
-      nom: nomApplicationAppele,
-      environnement: environnement(dev, integ, recette, prod) Appele
-      version: versionApplicationAppele,
-      url : urlAppele
-    },{
-    etc....
-    } 
+      "nom: 'nomApplicationAppele',
+     "environnement: 'environnement(dev, integ, recette, prod) Appele'
+      "version: 'versionApplicationAppele',
+      "url : 'urlAppele'
+    }
   ],
-  applicationEchec : [
+  "applicationEchec" : [
     {
-      nom: nomApplicationAppele,
-      url : urlAppele
+      "nom": 'nomApplicationAppele',
+      "url" : 'urlAppele'
     }
   ]
 }
@@ -173,4 +172,3 @@ une application est down par un seul appel ping, est ce que l'on considère que 
 
 
 
- 

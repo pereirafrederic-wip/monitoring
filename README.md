@@ -15,26 +15,25 @@ Il s'agit d'une simple application spring boot qui lance à intervalles très r�
 ### ping de vie de l'application
 
 Le ping de vie est un point d'entrée de toute application qu'on souhaite monitorer. Il permet de définir les applications qui sont UP ou DOWN
-Dans la majorité des cas , il s'agit d'une url dans le controller rest parent qui renvoie un simple objet qui définit l'application dans son environnement.
+Dans la majorité des cas , il s'agit d'une URL dans le controller rest parent qui renvoie un simple objet et qui définit l'application dans son environnement.
 
 Typiquement l'objet suivant reflète la clé du ping :
 
 ```json
 {
   "nom": "nomApplication",
- "environnement": "environnement(dev, integ, recette, prod)",
+  "environnement": "environnement(dev, integ, recette, prod)",
   "version": "versionApplication"
 }
 ```
 
-Sur l'application, une interface permettra d'ajouter une nouvelle url à monitorer. il s'agit que de cela car c'est l'appel ensuite qui déterminera tout seul pour quelle application et environnement il s'agit.
+Sur l'application, une interface permettra d'ajouter une nouvelle url à monitorer. L'URL détermienra à elle seule l'application et l'environnement qu'on souhaite atteindre.
 
-il permet de :
-* d'avoir une cartographie automatique
-* détecter qu'une application tombe ou est en cours de livraison
-* définir quel application est placé sur l'url
-* d'avoir les différents environnement
-* les versions déployés
+Ce processus permet :
+* d'avoir une cartographie applicative à jour
+* de détecter qu'une application est UP, ou DOWN
+* de lister les différents environnements
+* de connaître les versions déployés
 * une timeline de livraison des applications sur les environnements
 
 ## connexion entre applications

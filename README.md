@@ -95,7 +95,7 @@ Il permet de :
 
 Cela se base sur trois type de couleurs:
 * verte : application/links OK.
-* jaune : uniquement pour une application instable ( ping appli OK, au moins un ping link Down ).
+* jaune : uniquement pour une application instable ( ping appli OK, au moins un ping link Down critique/bloquant).
 * orange : application/links coupée et maitrisé.
 * violet : uniquement pour application avec un processus de livraison en cours.
 * rouge : application/links down non maitrisé.

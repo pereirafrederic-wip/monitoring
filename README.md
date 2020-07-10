@@ -74,7 +74,6 @@ Retour fait à l'application de monitoring par app1 :
   ],
   "applicationEchec" : [
     {
-      "nom": "nomApplicationAppele",
       "url" : "urlAppele",
       "bloquant" :"cela necessite t il de passer en jaune (boolean)"
     }

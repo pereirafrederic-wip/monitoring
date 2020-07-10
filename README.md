@@ -57,9 +57,9 @@ voici l'objet qui reflète le ping des connexions d'une application:
   "version": "versionApplication",
   "applicationOk" :[
     {
-      "nom: "nomApplicationAppele",
-     "environnement: "environnement(dev, integ, recette, prod) Appele",
-      "version: "versionApplicationAppele",
+      "nom": "nomApplicationAppele",
+     "environnement": "environnement(dev, integ, recette, prod) Appele",
+      "version": "versionApplicationAppele",
       "url : "urlAppele"
     }
   ],

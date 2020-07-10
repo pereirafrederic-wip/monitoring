@@ -1,77 +1,78 @@
 # monitoring
-projet de monitoring de parc d'applications
+Projet de monitoring d'un parc d'applications
 
 ## le principe
 
-les applications sont souvent liées les unes aux autres et lorsqu'une application tombe, il arrive souvent que c'est une réaction en chaine qui se produit.
-le but est d'avoir un monitoring de ses applications et de pouvoir détecter en un instant l'étendu de la panne. 
-le autre but est aussi d'atténuer l'effet cascade et ne pas rester dans le flou lors d'un incident.
+Les applications sont souvent liées les unes aux autres et lorsqu'une application tombe, il se produit souvent une réaction en chaîne.
+Le but est alors de monitorer ces applications et de pouvoir détecter en un instant l'étendue de la panne. 
+Un autre but est aussi d'atténuer l'effet cascade et ne pas rester dans le flou lors d'un incident.
 
 
-## l'application en elle même
+## l'application en elle-même
 
-une simple application spring boot qui lance à intervalle très régulier les différentes appels pour atteindre les pings d'une ou des applications.
+Il s'agit d'une simple application spring boot qui lance à intervalles très réguliers des pings d'une ou plusieurs applications.
 
 ### ping de vie de l'application
 
-le ping de vie est un point d'entrée de toute application qui veut être monitorée. elle permet de définir les applications qui sont UP ou DOWN
+Le ping de vie est un point d'entrée de toute application qu'on souhaite monitorer. Il permet de définir les applications qui sont UP ou DOWN
 
-dans la majorité des cas , il s'agit d'une url dans le controller rest parent qui renvoit un simple objet qui définit l'application dans son environnement.
+Dans la majorité des cas , il s'agit d'une url dans le controller rest parent qui renvoie un simple objet qui définit l'application dans son environnement.
 
 
-typiquement l'objet suivant reflète la clé du ping :
+Typiquement l'objet suivant reflète la clé du ping :
+```json
 {
-  "nom": 'nomApplication',
- "environnement": 'environnement(dev, integ, recette, prod)'
-  "version": 'versionApplication'
+  "nom": "nomApplication",
+ "environnement": "environnement(dev, integ, recette, prod)",
+  "version": "versionApplication"
 }
+```
+Sur l'application, une interface permettra une nouvelle url à monitorer. il s'agit que de cela car c'est l'appel ensuite qui déterminera tout seul pour quelle application et environnement il s'agit.
 
-sur l'application,
-une interface permettra une nouvelle url à monitorer. il s'agit que de cela car c'est l'appel ensuite qui déterminera tout seul pour quelle application et environnement il s'agit.
+il permet de :
+* détecter qu'une application tombe ou est en cours de livraison
+* définir quel application est placé sur l'url
+* d'avoir les différents environnement
+* les versions déployés
+* une timeline de livraison des applications sur les environnements
 
-il permet :
-* de détecter qu'une application tombe ou est en cours de livraison
-* de définir quelle application est située en face d'une URL donnée
-* d'avoir la liste des différents environnements
-* de connaître les versions déployées
-* d'aboir une timeline de livraison des applications sur les environnements
+## connexion entre applications
 
-## Connexion entre applications
+une application communique avec d'autres applications par plusieurs moyens à sa disposition
 
-Une application communique avec d'autres applications par plusieurs moyens à sa disposition.
+### ping de connexion
 
-### Ping de connexion
+lorsqu'une application est up, cela ne veut pas dire que l'application est opérationnelle. si elle ne peut pas atteindre une référentielle, transmettre en temps réel l'application. il peut y avoir une perte de transfert de données.
 
-Lorsqu'une application est UP, cela ne veut pas dire que l'application est opérationnelle. si elle ne peut pas atteindre une référentielle, transmettre en temps réel l'application. il peut y avoir une perte de transfert de données.
+le ping de connexion est le premier point d'entée entre deux applications. lorsque l'on établit un lien entre application, il est important de commencer par le test de connexion à travers un ping. le ping de connexion permet de faire un premier pas simple pour tester la configuration pour que l'appel se passe bien. et ensuite, il permet de créer le futur ping de connexion
 
-Le ping de connexion est le premier point d'entée entre deux applications. lorsque l'on établit un lien entre applications, il est important de commencer par le test de connexion à travers un ping. Le ping de connexion permet de faire un premier pas simple pour tester la configuration pour que l'appel se passe bien. et ensuite, il permet de créer le futur ping de connexion
+encore une fois, il s'agit de rajouter dans le controller rest parent une url qui renvoit un liste des connexions entres applications et envirronnement.
+l'application fera une boucle d'avoir des différents pings pour chaque links qu'elle possède
 
-Là aussi, il s'agit de rajouter dans le controller rest parent une URL qui renvoie un liste des connexions entres applications et environnements.
-L'application fera une boucle d'avoir des différents pings pour chaque links qu'elle possède
-
-Voici l'objet qui reflète le ping des connexions d'une application:
+voici l'objet qui reflète le ping des connexions d'une application:
+```json
 {
-  "nom": 'nomApplication',
-  "environnement": 'environnement(dev, integ, recette, prod)'
-  "version": 'versionApplication',
+  "nom": "nomApplication",
+  "environnement": "environnement(dev, integ, recette, prod)",
+  "version": "versionApplication",
   "applicationOk" :[
     {
       "nom": "nomApplicationAppele",
      "environnement": "environnement(dev, integ, recette, prod) Appele",
       "version": "versionApplicationAppele",
       "url" : "urlAppele"
-
     }
   ],
   "applicationEchec" : [
     {
-      "nom": 'nomApplicationAppele',
-      "url" : 'urlAppele'
+      "nom": "nomApplicationAppele",
+      "url" : "urlAppele"
     }
   ]
 }
-
-Sur l'application, une interface permettra d'ajouter cette nouvelle URL à monitorer. il s'agit que de cela car c'est l'appel ensuite qui déterminera tout seul quelles applications sont liés et monitorés 
+```
+sur l'application,
+une interface permettra d'ajouter cette nouvelle url à monitorer. il s'agit que de cela car c'est l'appel ensuite qui déterminera tout seul quelles applications sont liés et monitorés 
 
 il permet de :
 * détecter les liens en echecs et d'avoir un état des lieux 

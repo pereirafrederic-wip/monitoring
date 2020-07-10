@@ -27,7 +27,7 @@ Typiquement l'objet suivant reflète la clé du ping :
 }
 ```
 
-ur l'application, une interface permettra une nouvelle url à monitorer. il s'agit que de cela car c'est l'appel ensuite qui déterminera tout seul pour quelle application et environnement il s'agit.
+Sur l'application, une interface permettra d'ajouter une nouvelle url à monitorer. il s'agit que de cela car c'est l'appel ensuite qui déterminera tout seul pour quelle application et environnement il s'agit.
 
 il permet de :
 * d'avoir une cartographie automatique

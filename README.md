@@ -207,9 +207,11 @@ les applications à intervalle regulier appelle ce service pour signaler qu'il e
  le ping de links serait pensé dans le sens inverse, si tu n'arrive pas à communiquer avec une application,
  tu appelle le service rest en signalant qui tu es et qui tu n'arrives pas à joindre 
  
- l'avantage ,c'est que cela demande presque rien à developper, aucune nouvelle dépendance, ni même de besoin de monter en compétence
- l'inconvénient , c'est que les applications doivent pouvoir joindre l'application de monitoring
- et ne pas joindre l'application de monotoring ne veut pas dire que l'application est down et tu n'arriveras pas à signaler un souci de links
+ l'avantage :
+   * c'est que cela demande presque rien à developper, aucune nouvelle dépendance, ni même de besoin de monter en compétence
+ l'inconvénient :
+ * c'est que les applications doivent pouvoir joindre l'application de monitoring
+ *  ne pas joindre l'application de monotoring ne veut pas dire que l'application est down et tu n'arriveras pas à signaler un souci de links
   
  
  ## file MQ  / kafka
@@ -217,16 +219,24 @@ les applications à intervalle regulier appelle ce service pour signaler qu'il e
  le principe peut etre le même avec des files MQ , au lieu d'appeler un service, on envoi un message dans une file MQ 
  que l'application de monitoring viendra lire et agreger 
  
-  l'avantage , c'est que c'est asynchrone
- l'inconvénient ,c'est que les applications doivent pouvoir joindre la file de message
- et ne pas joindre la file de message ne veut pas dire que l'application est down et tu n'arriveras pas à signaler un souci de links
- et il faut ajouter cette fonctionnalité à toutes les applications et savoir le mettre en place
+   l'avantage :
+   * c'est que c'est asynchrone
+ l'inconvénient :
+ * c'est que les applications doivent pouvoir joindre la file de message
+ *  ne pas joindre la file de message ne veut pas dire que l'application est down et tu n'arriveras pas à signaler un souci de links
+ *  il faut ajouter cette fonctionnalité à toutes les applications et savoir le mettre en place
  
 ## suite kibana/elastic search   idatha
 
 le principe est logger sur un modele simple et léger les 2 informations. 
 ainsi en utilisant le bon filtre on peut avoir le monitoring et suivre en temps réelle 
 
- l'avantage , pas d'application et la puissance de ses services. les nombreux graphiques et possibilités.
- l'inconvénient , faut faire le necessaire pour logger sur ces plateformes. beaucoup de logs et aucune intelligence que pourrait avoir notre application de monitoring
+ l'avantage :
+ * pas d'application 
+ * la puissance de ses services
+ * les nombreux graphiques et possibilités.
+ l'inconvénient: 
+ * faut faire le necessaire pour logger sur ces plateformes. 
+ * beaucoup de logs
+ * aucune intelligence que pourrait avoir notre application de monitoring
  

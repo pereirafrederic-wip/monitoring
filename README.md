@@ -191,7 +191,7 @@ la présentation ci dessus est une présentation d'un mode superviseur où c'est
 
 l'avantage ,c'est que cela demande presque rien à developper, aucune nouvelle dépendance, ni même de besoin de monter en compétence
 l'inconvénient , c'est que l'application de monitoring doit pouvoir appeler tous le monde 
-+ l'application de monitoring devient une vraie application à part entière
+et l'application de monitoring devient une vraie application à part entière
 
 
 
@@ -220,7 +220,7 @@ les applications à intervalle regulier appelle ce service pour signaler qu'il e
   l'avantage , c'est que c'est asynchrone
  l'inconvénient ,c'est que les applications doivent pouvoir joindre la file de message
  et ne pas joindre la file de message ne veut pas dire que l'application est down et tu n'arriveras pas à signaler un souci de links
- + il faut ajouter cette fonctionnalité à toutes les applications et savoir le mettre en place
+ et il faut ajouter cette fonctionnalité à toutes les applications et savoir le mettre en place
  
 ## suite kibana/elastic search   idatha
 

@@ -200,7 +200,7 @@ il existe plusieurs autres façons de faire :
  
  ## api rest 
  
-le ping de l'application peut être remplacé par un poing d'entrée rest dans l'application de monitoring
+le ping de l'application peut être remplacé par un point d'entrée rest dans l'application de monitoring
 les applications à intervalle regulier appelle ce service pour signaler qu'il est toujours en vie
  si tu n'as plus de signal , c'est que ton application est down
  

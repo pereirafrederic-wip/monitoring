@@ -189,9 +189,12 @@ On peut aussi décdier de stopper ponctuellement le monitoing pendant une heure 
 la présentation ci dessus est une présentation d'un mode superviseur où c'est l'application qui va checker les sondes de vies etc....
 
 
-l'avantage ,c'est que cela demande presque rien à developper, aucune nouvelle dépendance, ni même de besoin de monter en compétence
-l'inconvénient , c'est que l'application de monitoring doit pouvoir appeler tous le monde 
-et l'application de monitoring devient une vraie application à part entière
+l'avantage :
+* c'est que cela demande presque rien à developper, aucune nouvelle dépendance, ni même de besoin de monter en compétence
+
+l'inconvénient :
+* c'est que l'application de monitoring doit pouvoir appeler tous le monde 
+* l'application de monitoring devient une vraie application à part entière
 
 
 
@@ -209,6 +212,7 @@ les applications à intervalle regulier appelle ce service pour signaler qu'il e
  
  l'avantage :
    * c'est que cela demande presque rien à developper, aucune nouvelle dépendance, ni même de besoin de monter en compétence
+   
  l'inconvénient :
  * c'est que les applications doivent pouvoir joindre l'application de monitoring
  *  ne pas joindre l'application de monotoring ne veut pas dire que l'application est down et tu n'arriveras pas à signaler un souci de links
@@ -219,7 +223,7 @@ les applications à intervalle regulier appelle ce service pour signaler qu'il e
  le principe peut etre le même avec des files MQ , au lieu d'appeler un service, on envoi un message dans une file MQ 
  que l'application de monitoring viendra lire et agreger 
  
-   l'avantage :
+  l'avantage :
    * c'est que c'est asynchrone
    
  l'inconvénient :

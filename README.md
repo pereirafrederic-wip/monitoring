@@ -221,6 +221,7 @@ les applications à intervalle regulier appelle ce service pour signaler qu'il e
  
    l'avantage :
    * c'est que c'est asynchrone
+   
  l'inconvénient :
  * c'est que les applications doivent pouvoir joindre la file de message
  *  ne pas joindre la file de message ne veut pas dire que l'application est down et tu n'arriveras pas à signaler un souci de links
@@ -235,6 +236,7 @@ ainsi en utilisant le bon filtre on peut avoir le monitoring et suivre en temps 
  * pas d'application 
  * la puissance de ses services
  * les nombreux graphiques et possibilités.
+ 
  l'inconvénient: 
  * faut faire le necessaire pour logger sur ces plateformes. 
  * beaucoup de logs
